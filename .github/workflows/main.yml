@@ -1,4 +1,4 @@
-name: Checking Tests
+name: main
 
 on:
   pull_request:
@@ -8,24 +8,27 @@ on:
 
 jobs:
   test:
-    name: Checking Tests
+    name: main
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v1
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v1
         with:
           node-version: 21.x
 
       - name: Install dependencies
         run: npm install
+
+      - name: Run Lint
+        run: npm run lint
       
       - name: Build App
         run: npm run build
 
       - name: Run vitest tests
-        run: npm run test
+        run: npm run test-component
 
